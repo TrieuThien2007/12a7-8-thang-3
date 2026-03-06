@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc mừng 8 tháng 3</title>
+  <style>
+    :root {
+      --bg1: #fff3e8;
+      --bg2: #ffd9c8;
+      --bg3: #ffc8d7;
+      --primary: #ff6f91;
+      --primary-dark: #d94f70;
+      --text: #5f3641;
+      --shadow: 0 14px 40px rgba(126, 50, 72, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.85), transparent 30%),
+        radial-gradient(circle at top right, rgba(255,255,255,.55), transparent 25%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 48%, var(--bg3));
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
+        radial-gradient(rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 26px 26px, 42px 42px;
+      background-position: 0 0, 12px 12px;
+      opacity: .45;
+    }
+
+    .page {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      width: min(960px, calc(100vw - 24px));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .title-3d {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(2.3rem, 5vw, 4.6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff8f2;
+      letter-spacing: 1px;
+      text-shadow:
+        0 1px 0 #ffd8a8,
+        0 2px 0 #ffc27a,
+        0 3px 0 #ffb15c,
+        0 4px 0 #f89b45,
+        0 5px 0 #ea7d2d,
+        0 6px 14px rgba(0, 0, 0, .18),
+        0 14px 28px rgba(255, 111, 145, .25);
+      animation: titleFloat 4.5s ease-in-out infinite;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .subtitle {
+      background: rgba(255,255,255,.58);
+      backdrop-filter: blur(10px);
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      font-size: 0.98rem;
+      text-align: center;
+    }
+
+    .composer {
+      width: min(800px, calc(100vw - 24px));
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 160px 1fr 140px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .composer input,
+    .composer textarea {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-radius: 16px;
+      background: rgba(255,255,255,.9);
+      padding: 14px 15px;
+      font-size: 0.98rem;
+      color: var(--text);
+      box-shadow: inset 0 0 0 1px rgba(255,111,145,.16);
+    }
+
+    .composer textarea {
+      min-height: 60px;
+      max-height: 110px;
+      resize: vertical;
+    }
+
+    .composer button {
+      border: none;
+      cursor: pointer;
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      box-shadow: 0 12px 24px rgba(217, 79, 112, .28);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .composer button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 18px 28px rgba(217, 79, 112, .32);
+    }
+
+    .composer button:disabled {
+      opacity: .72;
+      cursor: wait;
+      transform: none;
+    }
+
+    .stage {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .wish {
+      position: absolute;
+      min-width: 240px;
+      max-width: 360px;
+      padding: 14px 16px 18px;
+      border-radius: 22px;
+      color: var(--text);
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(255,255,255,.75);
+      box-shadow: 0 16px 30px rgba(115, 64, 79, .14);
+      backdrop-filter: blur(10px);
+      animation-name: flyLeft;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform;
+    }
+
+    .wish::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      bottom: -12px;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,.8);
+      transform: rotate(45deg);
+      border-bottom-right-radius: 4px;
+      z-index: -1;
+    }
+
+    .wish-message {
+      font-size: 1rem;
+      line-height: 1.5;
+      word-break: break-word;
+      padding-right: 8px;
+    }
+
+    .wish-name {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      font-size: .92rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    @keyframes flyLeft {
+      from { transform: translateX(120vw); }
+      to { transform: translateX(-160vw); }
+    }
+
+    .confetti-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 18px;
+      opacity: .95;
+      border-radius: 2px;
+      animation: confettiBurst linear forwards;
+    }
+
+    @keyframes confettiBurst {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+        opacity: 0;
+      }
+    }
+
+    .status {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 9px 16px;
+      box-shadow: var(--shadow);
+      font-size: .92rem;
+      opacity: 0;
+      transition: opacity .25s ease;
+      max-width: calc(100vw - 32px);
+      text-align: center;
+    }
+
+    .status.show { opacity: 1; }
+
+    @media (max-width: 860px) {
+      .composer {
+        grid-template-columns: 1fr;
+      }
+
+      .wish {
+        min-width: 200px;
+        max-width: 78vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="top-bar">
+      <h1 class="title-3d">Chúc Mừng 8 Tháng 3</h1>
+      <div class="subtitle">CHÚC MỪNG 8 THÁNG 3 12A7</div>
+
+      <form class="composer" id="wishForm">
+        <input id="nameInput" type="text" maxlength="30" placeholder="Tên của bạn" required />
+        <textarea id="messageInput" maxlength="220" placeholder="Viết lời chúc của bạn tại đây..." required></textarea>
+        <button id="saveBtn" type="submit">Lưu lời chúc</button>
+      </form>
+    </div>
+
+    <div class="stage" id="stage"></div>
+    <div class="confetti-layer" id="confettiLayer"></div>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      orderBy,
+      onSnapshot,
+      serverTimestamp,
+      limit
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // DÁN FIREBASE CONFIG THẬT CỦA BẠN VÀO ĐÂY
+const firebaseConfig = {
+  apiKey: "AIzaSyDZ_rPbIjCVTeZq5qNeAl1Y5vWDkeBbBSs",
+  authDomain: "chuc-mung-8-3.firebaseapp.com",
+  projectId: "chuc-mung-8-3",
+  storageBucket: "chuc-mung-8-3.firebasestorage.app",
+  messagingSenderId: "612521701967",
+  appId: "1:612521701967:web:5ec78ad8dbd9aae955f03a",
+  measurementId: "G-6FD7MENZJ6"
+};
+
+    const stage = document.getElementById("stage");
+    const confettiLayer = document.getElementById("confettiLayer");
+    const wishForm = document.getElementById("wishForm");
+    const nameInput = document.getElementById("nameInput");
+    const messageInput = document.getElementById("messageInput");
+    const saveBtn = document.getElementById("saveBtn");
+    const statusBox = document.getElementById("status");
+
+    let db = null;
+    let wishesRef = null;
+
+    function showStatus(text) {
+      statusBox.textContent = text;
+      statusBox.classList.add("show");
+      clearTimeout(showStatus._timer);
+      showStatus._timer = setTimeout(() => {
+        statusBox.classList.remove("show");
+      }, 2600);
+    }
+
+    function random(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function makeWishBubble(wish, index) {
+      const bubble = document.createElement("div");
+      bubble.className = "wish";
+
+      const topStart = 190;
+      const rowGap = 52;
+      const rows = Math.max(5, Math.floor((window.innerHeight - 240) / rowGap));
+      const vertical = topStart + (index % rows) * rowGap + random(-8, 8);
+      const duration = random(23, 34);
+      const delay = random(-duration, 0);
+
+      bubble.style.top = `${Math.min(vertical, window.innerHeight - 110)}px`;
+      bubble.style.animationDuration = `${duration}s`;
+      bubble.style.animationDelay = `${delay}s`;
+
+      bubble.innerHTML = `
+        <div class="wish-message"></div>
+        <div class="wish-name"></div>
+      `;
+
+      bubble.querySelector(".wish-message").textContent = wish.message || "";
+      bubble.querySelector(".wish-name").textContent = wish.name || "Ẩn danh";
+      return bubble;
+    }
+
+    function renderWishes(wishes) {
+      stage.innerHTML = "";
+      wishes.forEach((wish, index) => {
+        stage.appendChild(makeWishBubble(wish, index));
+      });
+    }
+
+    function startEmptyMessage() {
+      renderWishes([
+        { name: "Hệ thống", message: "Hãy là người đầu tiên gửi lời chúc nhé!" }
+      ]);
+    }
+
+    function initFirebase() {
+      const invalidConfig = Object.values(firebaseConfig).some(value => String(value).includes("YOUR_"));
+      if (invalidConfig) {
+        showStatus("Bạn chưa dán Firebase config thật.");
+        startEmptyMessage();
+        return;
+      }
+
+      try {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        wishesRef = collection(db, "womens_day_wishes");
+
+        const wishesQuery = query(wishesRef, orderBy("createdAt", "desc"), limit(50));
+        onSnapshot(
+          wishesQuery,
+          (snapshot) => {
+            const wishes = snapshot.docs
+              .map((doc) => doc.data())
+              .filter((item) => item && item.name && item.message);
+
+            if (wishes.length === 0) {
+              startEmptyMessage();
+            } else {
+              renderWishes(wishes);
+            }
+          },
+          (error) => {
+            console.error("Lỗi đọc Firestore:", error);
+            showStatus("Không đọc được dữ liệu. Kiểm tra Firestore Rules.");
+            startEmptyMessage();
+          }
+        );
+      } catch (error) {
+        console.error("Lỗi khởi tạo Firebase:", error);
+        showStatus("Firebase config đang sai.");
+        startEmptyMessage();
+      }
+    }
+
+    wishForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if (!name || !message) {
+        showStatus("Vui lòng nhập tên và lời chúc.");
+        return;
+      }
+
+      if (!wishesRef) {
+        showStatus("Chưa kết nối được Firebase nên chưa lưu được.");
+        return;
+      }
+
+      try {
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Đang lưu...";
+
+        await addDoc(wishesRef, {
+          name,
+          message,
+          createdAt: serverTimestamp()
+        });
+
+        messageInput.value = "";
+        showStatus("Đã lưu lời chúc thành công!");
+      } catch (error) {
+        console.error("Lỗi lưu Firestore:", error);
+        showStatus("Lưu thất bại. Hãy kiểm tra Rules và Firestore.");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Lưu lời chúc";
+      }
+    });
+
+    function shootConfetti(side = "left") {
+      const count = 14;
+      const baseX = side === "left" ? 40 : window.innerWidth - 40;
+      const baseY = window.innerHeight - 18;
+      const colors = ["#ff6f91", "#ffc75f", "#f9f871", "#f7a8b8", "#ffffff", "#ffa69e"];
+
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti";
+
+        const dx = side === "left" ? random(40, 220) : random(-220, -40);
+        const dy = random(-320, -120);
+        const rot = `${random(160, 720)}deg`;
+
+        piece.style.left = `${baseX + random(-10, 10)}px`;
+        piece.style.top = `${baseY}px`;
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.width = `${random(6, 12)}px`;
+        piece.style.height = `${random(12, 22)}px`;
+        piece.style.setProperty("--dx", `${dx}px`);
+        piece.style.setProperty("--dy", `${dy}px`);
+        piece.style.setProperty("--rot", rot);
+        piece.style.animationDuration = `${random(1.8, 3.2)}s`;
+
+        confettiLayer.appendChild(piece);
+        setTimeout(() => piece.remove(), 3400);
+      }
+    }
+
+    setInterval(() => shootConfetti("left"), 850);
+    setInterval(() => shootConfetti("right"), 850);
+
+    window.addEventListener("resize", () => {
+      const bubbles = [...document.querySelectorAll(".wish")].map((el) => ({
+        name: el.querySelector(".wish-name")?.textContent || "",
+        message: el.querySelector(".wish-message")?.textContent || ""
+      }));
+
+      if (bubbles.length) {
+        renderWishes(bubbles);
+      }
+    });
+
+    initFirebase();
+  </script>
+</body>
+</html>
