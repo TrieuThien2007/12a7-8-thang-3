@@ -157,7 +157,10 @@
 
     .stage {
       position: absolute;
-      inset: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 340px;
       overflow: hidden;
       z-index: 10;
     }
@@ -343,7 +346,7 @@ const firebaseConfig = {
       const bubble = document.createElement("div");
       bubble.className = "wish";
 
-      const topStart = 190;
+      const topStart = 20;
       const rowGap = 52;
       const rows = Math.max(5, Math.floor((window.innerHeight - 240) / rowGap));
       const vertical = topStart + (index % rows) * rowGap + random(-8, 8);
