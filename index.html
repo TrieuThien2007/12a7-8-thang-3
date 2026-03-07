@@ -350,8 +350,8 @@ const firebaseConfig = {
       const rowGap = 52;
       const rows = Math.max(5, Math.floor((window.innerHeight - 240) / rowGap));
       const vertical = topStart + (index % rows) * rowGap + random(-8, 8);
-      const duration = random(23, 34);
-      const delay = random(-duration, 0);
+      const duration = random(35, 55);
+      const delay = random(-duration *1.2, -2);
 
       bubble.style.top = `${Math.min(vertical, window.innerHeight - 110)}px`;
       bubble.style.animationDuration = `${duration}s`;
